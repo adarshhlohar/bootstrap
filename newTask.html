@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        console.log("we are inside the loop");
+        var product = [];
+        // var index = -1;
+        function add() {
+            console.log("we are inside the add");
+            var pi = (document.getElementById("txt1").value());
+            console.log("The value :" + pi)
+            var pn = (document.getElementById("txt2").value());
+            console.log("The value :" + pn)
+            var pr = Number(document.getElementById("txt3").value());
+            console.log("The value :" + pr)
+            var pq = Number(document.getElementById("txt4").value());
+            console.log("The value :" + pq)
+            var total = pr * pq;
+
+            var pd = {
+                "Product_Id": pi,
+                "Product_Name": pn,
+                "Product_Price": pr,
+                "Product_Quantity": pq
+            };
+
+            console.log("The values are :" + pi + pn + pr + pq);
+            product.push(pd);
+            alert("Product Added Successfully");
+            clear();
+            display();
+
+        };
+        function display() {
+            var i;
+            var data = "";
+            for (i = 0; i < product.length; i++) {
+                var total = Number(product[i].pr + Number(product[i].pq));
+                data = "<tr><td>" + product[i].pi + "</td><td>" + product[i].pn + "</td ><td>" + product[i].pr + "</td><td>" + product[i].pq + "</td><td>" + product[i].total + "</td><td>" + "<input type='button' value='X' onclick='Deleteproduct'(" + i + ")/>" + "<input type='button' value='view' onclick='Viewproduct'(" + i + ")/></td></tr>"
+                document.getElementById("tbldata").innerHTML = data;
+            }
+        };
+        function Deleteproduct(d) {
+            product.splice(d, 1);
+            alert("deleted succesfully");
+            display();
+        };
+        function Viewproduct(d) {
+            index = d;
+            var pd = product[index];
+            document.getElementById("txt1").value() = pd.pi;
+            document.getElementById("txt2").value() = pd.pn;
+            document.getElementById("txt3").value() = pd.pr;
+            document.getElementById("txt4").value() = pd.pq;
+        }
+        function clear() {
+            document.getElementById("txt1").value() = "";
+            document.getElementById("txt2").value() = "";
+            document.getElementById("txt3").value() = "";
+            document.getElementById("txt4").value() = "";
+        }
+
+    </script>
+</head>
+
+<body>
+    <table >
+        <tr>
+            <td>Product Id</td>
+            <td><input type="text" id="txt1" /></td>
+        </tr>
+        <tr>
+            <td>Product Name</td>
+            <td><input type="text" id="txt2" /></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><input type="text" id="txt3" /></td>
+        </tr>
+        <tr>
+            <td>Quantity</td>
+            <td><input type="text" id="txt4" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="add" onclick="add()"/></td>
+        </tr>
+
+    </table>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbldata"></tbody>
+    </table>
+</body>
+
+</html>
